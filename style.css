@@ -1,0 +1,124 @@
+header{
+    display: flex;
+    padding: 2% 7%;
+    justify-content: space-between;
+    background: #000000;
+    width: 100vw;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background: #F3F5FC;
+    overflow-x: hidden;
+}
+.main{
+    display: flex;
+    width: 100vw;
+    justify-content:space-around;
+    padding-top: 50px;
+    font-family: 'Sofia Sans', sans-serif;
+    
+}
+
+.regular_phrase{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    width: 400px;
+    height: auto;
+}
+
+#title_regular_phrase{
+    height: 30px;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.box_regular_phrase{
+    width: 300px;
+    height: 200px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+    border-radius: 32px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.textarea_regular_phrase{
+    width: 285px;
+    height: 185px;
+    border: none;
+    resize: none;
+    outline:none;
+    background: white;
+    color: black;
+}
+
+#button_regular_phrase{
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: greenyellow;
+    color: green;
+    font-size: 15px;
+    padding: 10px 30px;
+}
+
+#button_regular_phrase:hover{
+    background-color: rgb(151, 236, 22);
+    color: rgb(48, 84, 48);
+}
+
+.graph_automaton{
+    display: flex;
+    flex-wrap: wrap;
+    width: 950px;
+    height: auto;
+    justify-content: left;
+    align-content: flex-start;
+}
+
+#title_automaton{
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 30px;
+    width: auto;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.box_automaton{
+    display: flex;
+    width: 950px;
+    height: 550px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+    border-radius: 32px;
+}
+
+.box_history_Expresion{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+    margin-top: 15px;
+    background-color: #FFFFFF;
+    width: 370px;
+    height: 300px;
+    border-radius: 32px;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+.accepted_words,.unaccepted_words{
+    width: 80%;
+    height: 45%;
+    border-radius: 10px;
+    box-shadow: 0px 24px 15px 0px rgba(8, 7, 7, 0.08);
+    background-color: rgb(249, 255, 255);
+}
