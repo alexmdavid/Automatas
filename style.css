@@ -1,124 +1,166 @@
-header{
+/* Estilos generales */
+body {
+    margin: 10px;
+    padding: 10px;
     display: flex;
-    padding: 2% 7%;
-    justify-content: space-between;
-    background: #000000;
-    width: 100vw;
+    justify-content: center;
     align-items: center;
-    font-size: 25px;
-    font-weight: 600;
+    font-family: 'Sofia Sans', sans-serif;
+    background-color: #F3F5FC;
+    color: #444;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    gap: 20px;
+    width: 95%;
+    max-width: 1200px;
+    background-color: #00ff1e5c;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+    padding: 20px;
     box-sizing: border-box;
 }
 
-body{
-    width: 100vw;
-    height: 100vh;
-    background: #F3F5FC;
-    overflow-x: hidden;
-}
-.main{
+/* Estilos de la primera sección (lado izquierdo) */
+.regular_phrase {
     display: flex;
-    width: 100vw;
-    justify-content:space-around;
-    padding-top: 50px;
-    font-family: 'Sofia Sans', sans-serif;
-    
-}
-
-.regular_phrase{
-    display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
     align-content: flex-start;
     justify-content: center;
-    width: 400px;
+    width: 48%; /* Ocupa el 48% del ancho del contenedor principal */
     height: auto;
 }
 
-#title_regular_phrase{
-    height: 30px;
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 20px;
-}
+/* Estilos del área de texto de expresión regular */
 
-.box_regular_phrase{
-    width: 300px;
-    height: 200px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
-    border-radius: 32px;
-    margin-bottom: 10px;
-    padding: 15px;
-}
 
-.textarea_regular_phrase{
-    width: 285px;
+.label_regular_phrase {
+    display: block;
+    width: 100%;
     height: 185px;
     border: none;
     resize: none;
-    outline:none;
+    outline: none;
     background: white;
     color: black;
 }
 
-#button_regular_phrase{
+
+/* Estilos del cuadro de entrada de texto */
+#input_regular_phrase {
+    cursor: pointer;
+    width: 70%;
+    padding: 10px;
+    margin: 7px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    color: black;
+}
+
+/* Estilos del cuadro de expresión regular */
+.box_regular_phrase {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Redondear los bordes */
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* Estilos del botón de verificación */
+#button_regular_phrase {
     border-radius: 10px;
     cursor: pointer;
-    background-color: greenyellow;
-    color: green;
+    background-color: #00ff1e77;
+    color: black;
     font-size: 15px;
-    padding: 10px 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-#button_regular_phrase:hover{
+#button_regular_phrase:hover {
     background-color: rgb(151, 236, 22);
     color: rgb(48, 84, 48);
+    transform: scale(1.1);
 }
 
-.graph_automaton{
+#unaccepted_words, #accepted_words {
+    width: 80%;
+    height: 30px;
+    padding: 10px;
+    margin: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #333;
+    overflow-y: auto;
+}
+
+/* Estilos de la segunda sección (lado derecho) */
+.graph_automaton {
+    width: 48%; /* Ocupa el 48% del ancho del contenedor principal */
     display: flex;
-    flex-wrap: wrap;
-    width: 950px;
-    height: auto;
+    flex-direction: column;
+    gap: 20px;
     justify-content: left;
     align-content: flex-start;
 }
 
-#title_automaton{
+/* Estilos del título del gráfico de autómata */
+#title_automaton {
     font-size: 30px;
     font-weight: bold;
-    margin-left: 30px;
-    width: auto;
-    height: 30px;
+    margin-left: 0; /* Alinea el título a la izquierda */
     margin-bottom: 20px;
 }
 
-#box_automaton{
+/* Estilos del contenedor del gráfico de autómata */
+#box_automaton {
     display: flex;
-    width: 950px;
+    width: 100%; /* Ocupa todo el ancho disponible */
     height: 550px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
-    border-radius: 32px;
+    border: 6px double #878585;
+    background-color: #f0f0f0;
+    border-radius: 20px;
 }
 
-.box_history_Expresion{
+/* Estilos del historial de expresiones */
+.box_history_Expresion {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-around;
-    margin-top: 15px;
-    background-color: #FFFFFF;
-    width: 370px;
-    height: 300px;
-    border-radius: 32px;
-    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Redondear los bordes */
+    padding: 20px;
 }
 
-.accepted_words,.unaccepted_words{
-    width: 80%;
+/* Estilos de las secciones de palabras aceptadas y no aceptadas */
+.accepted_words, .unaccepted_words {
+    width: 100%; /* Ocupa todo el ancho disponible */
     height: 45%;
     border-radius: 10px;
-    box-shadow: 0px 24px 15px 0px rgba(8, 7, 7, 0.08);
     background-color: rgb(249, 255, 255);
+}
+
+.container,
+#box_regular_phrase,
+#input_regular_phrase,
+#button_regular_phrase,
+#accepted_words,
+#unaccepted_words,
+#box_automaton {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.45);
 }

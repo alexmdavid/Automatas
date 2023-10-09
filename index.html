@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./_reset.css" type="text/css">
     <link href="./style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./_reset.css" type="text/css">
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <title>Automata</title>
 </head>
@@ -13,30 +13,38 @@
         
     </header>
     <div class="main">
-        <section class="regular_phrase">
-            <h3 id="title_regular_phrase">Expresion</h3>
-            <div class="box_regular_phrase">
-                <textarea class="textarea_regular_phrase" placeholder="Ingrese palabra"></textarea>
-            </div>
-            <button type="button" id="button_regular_phrase">Verificar</button>
-            <div class="box_history_Expresion">
-                <section class="accepted_words">
-                    
-                </section>
-                <section class="unaccepted_words">
-
-                </section>
-            </div>
-        </section>
-        <section class="graph_automaton">
-            <h2 id="title_automaton">Grafico Del Automata</h2>
-            <div id="box_automaton">
+        <div class="container">
+            <section class="column regular_phrase">
+                <h1 id="title_regular_phrase">Validación con Autómata Finito</h1>
+                <div class="box_regular_phrase">
+                    <label id="label_regular_phrase" for="inputTexto">Ingresa una palabra:</label>
+                    <input type="text" id="input_regular_phrase" placeholder="Escribe aquí">
+                    <button id="button_regular_phrase" onclick="validarPalabra()">Verificar</button>
+                </div>
+                <div class="box_history_Expresion">
+                    <h2 style="display: contents;">Historial de Palabras</h2>
+                    <div class="word_section">
+                        <h3>Palabras Aceptadas</h3>
+                        <textarea id="accepted_words" readonly></textarea>
+                    </div>
+                
+                    <div class="word_section">
+                        <h3>Palabras No Aceptadas</h3>
+                        <textarea id="unaccepted_words" readonly></textarea>
+                    </div>
+                </div>
+            </section>
     
-            </div>
-        </section>
+            <section class="column graph_automaton">
+                <h2 id="title_automaton">Grafo Del Automata</h2>
+                <div id="box_automaton">
+                </div>
+            </section>
+        </div>
+        
     </div>
 
+    <script src="./js/Graph.js"></script>
 
 </body>
 </html>
-<script src="./js/Graph.js"></script>
