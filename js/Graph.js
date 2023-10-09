@@ -52,6 +52,32 @@ var edges = [
   { from: 22, to: 26, label:"b", font:fonts, arrows:'to' },
   { from: 24, to: 26, label:"b", font:fonts, arrows:'to' },
     //rama principal de a
+  { from: 0, to: 10, label:"a", font:fonts, arrows:'to' },
+  { from: 10, to: 2, label:"a", font:fonts, arrows:'to' },
+  { from: 2, to: 28, label:"b", font:fonts, arrows:'to' },
+  { from: 2, to: 3, label:"a", font:fonts, arrows:'to' },
+  { from: 3, to: 4, label:"a", font:fonts, arrows:'to' },
+  { from: 4, to: 5, label:"a", font:fonts, arrows:'to' },
+  { from: 3, to: 11, label:"b", font:fonts, arrows:'to' },
+  { from: 5, to: 27, label:"b", font:fonts, arrows:'to' },
+  { from: 5, to: 6, label:"a", font:fonts, arrows:'to' },
+  { from: 6, to: 7, label:"a", font:fonts, arrows:'to' },
+  { from: 7, to: 8, label:"a", font:fonts, arrows:'to' },
+  { from: 8, to: 9, label:"a", font:fonts, arrows:'to' },
+  { from: 11, to: 12, label:"a", font:fonts, arrows:'to' },
+  { from: 12, to: 13, label:"a", font:fonts, arrows:'to' },
+  { from: 13, to: 14, label:"a", font:fonts, arrows:'to' },
+  { from: 11, to: 15, label:"b", font:fonts, arrows:'to' },
+  { from: 13, to: 15, label:"b", font:fonts, arrows:'to' },
+  { from: 28, to: 27, label:"b", font:fonts, arrows:'to' },
+  { from: 27, to: 7, label:"a", font:fonts, arrows:'to' },
+  { from: 6, to: 26, label:"b", font:fonts, arrows:'to' },
+  { from: 8, to: 26, label:"b", font:fonts, arrows:'to' },
+  { from: 28, to: 4, label:"a", font:fonts, arrows:'to' },
+  { from: 27, to: 26, label:"b", font:fonts, arrows:'to' },
+ 
+  
+  
 ];
 
 // create a network
