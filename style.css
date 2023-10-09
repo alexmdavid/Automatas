@@ -93,7 +93,7 @@ body{
     margin-bottom: 20px;
 }
 
-.box_automaton{
+#box_automaton{
     display: flex;
     width: 950px;
     height: 550px;
