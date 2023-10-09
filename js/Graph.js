@@ -75,8 +75,6 @@ var edges = [
   { from: 8, to: 26, label:"b", font:fonts, arrows:'to' },
   { from: 28, to: 4, label:"a", font:fonts, arrows:'to' },
   { from: 27, to: 26, label:"b", font:fonts, arrows:'to' },
- 
-  
   
 ];
 
@@ -101,3 +99,52 @@ var options = {
   },
 };
 network = new vis.Network(container, data, options);
+
+
+
+// Arreglo de identificadores de estados finales
+const estadosFinales = [0, 10, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
+
+// Función para verificar una palabra
+function verificarPalabra(palabra) {
+  let estadoActual = 0; // El estado inicial
+  for (let i = 0; i < palabra.length; i++) {
+    const simbolo = palabra[i];
+    // Buscar la transición desde el estado actual con el símbolo actual
+    const transicion = edges.find((edge) => edge.from === estadoActual && edge.label === simbolo);
+    if (!transicion) {
+      return false; // No se encontró una transición válida, la palabra es rechazada
+    }
+    estadoActual = transicion.to; // Moverse al siguiente estado
+  }
+  // Verificar si el estado actual es un estado final
+  return estadosFinales.includes(estadoActual);
+}
+
+// Ejemplo de uso
+const palabra = "abab"; // Cambia esto por la palabra que quieras verificar
+const esAceptada = verificarPalabra(palabra);
+if (esAceptada) {
+  console.log("La palabra es aceptada por el autómata.");
+} else {
+  console.log("La palabra es rechazada por el autómata.");
+}
+
+// Función para validar una palabra ingresada
+function validarPalabra() {
+  const inputElement = document.getElementById("input_regular_phrase");
+  const palabra = inputElement.value;
+  const esAceptada = verificarPalabra(palabra);
+
+  const acceptedWordsElement = document.getElementById("accepted_words");
+  const unacceptedWordsElement = document.getElementById("unaccepted_words");
+
+  if (esAceptada) {
+    acceptedWordsElement.value += palabra + "\n";
+  } else {
+    unacceptedWordsElement.value += palabra + "\n";
+  }
+
+  // Limpiar el campo de entrada después de la validación
+  inputElement.value = "";
+}
