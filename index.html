@@ -15,22 +15,30 @@
     <div class="main">
         <div class="container">
             <section class="column regular_phrase">
-                <h1 id="title_regular_phrase">Validación con Autómata Finito</h1>
+                <select id="languageSelector">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="pt">Português</option>
+                </select>
+                <h1 style="font-weight: bold;" id="title_regular_phrase">Validación con Autómata Finito</h1>
                 <div class="box_regular_phrase">
-                    <label id="label_regular_phrase" for="input_regular_phrase">Ingresa una palabra:</label>
+                    <label style="font-weight: bold;" id="label_regular_phrase" for="input_regular_phrase">Ingresa una palabra:</label>
                     <input type="text" id="input_regular_phrase" placeholder="Escribe aquí">
                     <button id="button_regular_phrase" onclick="validarPalabra()">Verificar</button>
                 </div>
-                <div class="box_history_Expresion">
-                    <h2 style="display: contents;">Historial de Palabras</h2>
+                <div class="box_history_expresion">
+                    <h2 id="title" style="font-size: 16;">Historial de Palabras</h2>
                     <div class="word_section">
-                        <h3>Palabras Aceptadas</h3>
-                        <textarea id="accepted_words" readonly></textarea>
-                    </div>
-                
-                    <div class="word_section">
-                        <h3>Palabras No Aceptadas</h3>
-                        <textarea id="unaccepted_words" readonly></textarea>
+                        <div class="accepted_section">
+                            <h2 id="accepted_word">Palabras Aceptadas</h2>
+                            <textarea id="accepted_words" readonly></textarea>
+                        </div>
+                    
+                        <div class="unaccepted_section">
+                            <h2 id="unaccepted_word">Palabras No Aceptadas</h2>
+                            <textarea id="unaccepted_words" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -45,6 +53,7 @@
     </div>
 
     <script src="./js/Graph.js"></script>
+    <script src="./js/language.js"></script>
 
 </body>
 </html>

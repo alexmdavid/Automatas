@@ -96,7 +96,27 @@ var options = {
   edges: {
     width: 2,
     shadow: false,
+    font: {
+      size: 48,
+    },
   },
+  physics: {
+    enabled: true,
+    solver: "forceAtlas2Based",
+    forceAtlas2Based: {
+      gravitationalConstant: -100, // Puedes ajustarlo según tu preferencia
+      springConstant: 0.08, // Puedes ajustarlo según tu preferencia
+      springLength: 100, // Puedes ajustarlo según tu preferencia
+    },
+    timestep: 0.35, // Puedes ajustarlo según tu preferencia
+    stabilization: {
+      enabled: true,
+      iterations: 1000,
+      fit: true,
+    },
+  
+  },
+  
 };
 network = new vis.Network(container, data, options);
 
@@ -147,4 +167,7 @@ function validarPalabra() {
 
   // Limpiar el campo de entrada después de la validación
   inputElement.value = "";
+
+  // Poner el cursor en el campo de entrada
+  inputElement.focus();
 }
