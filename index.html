@@ -24,8 +24,9 @@
                 <h1 style="font-weight: bold;" id="title_regular_phrase">Validación con Autómata Finito</h1>
                 <div class="box_regular_phrase">
                     <label style="font-weight: bold;" id="label_regular_phrase" for="input_regular_phrase">Ingresa una palabra:</label>
-                    <input type="text" id="input_regular_phrase" placeholder="Escribe aquí">
-                    <button id="button_regular_phrase" onclick="validarPalabra()">Verificar</button>
+                    <br>
+                    <input type="text" id="input_regular_phrase" placeholder="Write here" onkeydown="checkEnter(event)">
+                    <button id="button_regular_phrase" onclick="validateWord()">Verificar</button>
                 </div>
                 <div class="box_history_expresion">
                     <h2 id="title" style="font-size: 16;">Historial de Palabras</h2>
@@ -52,8 +53,16 @@
         
     </div>
 
-    <script src="./js/Graph.js"></script>
-    <script src="./js/language.js"></script>
+    <script src="./js/graph.js"></script>
 
 </body>
 </html>
+
+<script>
+    function checkEnter(event) {
+    if (event.keyCode === 13) {
+      validateWord();
+    }
+  }
+</script>
+
