@@ -1,4 +1,4 @@
-var len = undefined;
+
 
 var fonts ={ strokeWidth: 2,size:35 }
 
@@ -78,12 +78,11 @@ var edges = [
   
 ];
 
-// create a network
-var container = document.getElementById("box_automaton");
 var data = {
   nodes: nodes,
   edges: edges,
 };
+
 var options = {
   nodes: {
     shape: "circle",
@@ -118,56 +117,128 @@ var options = {
   },
   
 };
-network = new vis.Network(container, data, options);
+
+var container = document.getElementById("box_automaton");
+
+// create a network
+new vis.Network(container, data, options);
+
+// hasta aqui debe llegar este modulo ------------------------------------------------------------------------------------------
+
+
+// crear modulo textToEspeech para lo de abajo 
+function textToSpeech(isAccepted) {
+  var message = '';
+  var languageSelector = document.getElementById("languageSelector");
+  var selectedLanguage = languageSelector.value; // Obtiene el idioma seleccionado del select
+
+  if (isAccepted) {
+    message = "La palabra es aceptada por el autómata";
+  } else {
+    message = "La palabra es rechazada por el autómata";
+  }
+
+  var utterance = new SpeechSynthesisUtterance(message);
+  utterance.lang = selectedLanguage; // Establece el idioma de la voz según la selección del select
+  speechSynthesis.speak(utterance);
+}
+// fin modulo textToEspeech **********************************************************************************
 
 
 
+// crear modulo validateWord para lo de abajo *****************************************************************************
 // Arreglo de identificadores de estados finales
-const estadosFinales = [0, 10, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
+const finalStates = [0, 10, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
 
 // Función para verificar una palabra
-function verificarPalabra(palabra) {
-  let estadoActual = 0; // El estado inicial
-  for (let i = 0; i < palabra.length; i++) {
-    const simbolo = palabra[i];
+function verifyWord(word) {
+  let currentState = 0; // The initial state
+  for (let i = 0; i < word.length; i++) {
+    const symbol = word[i];
     // Buscar la transición desde el estado actual con el símbolo actual
-    const transicion = edges.find((edge) => edge.from === estadoActual && edge.label === simbolo);
-    if (!transicion) {
+    const transition = edges.find((edge) => edge.from === currentState && edge.label === symbol);
+    if (!transition) {
       return false; // No se encontró una transición válida, la palabra es rechazada
     }
-    estadoActual = transicion.to; // Moverse al siguiente estado
+    currentState = transition.to; // Mover al siguiente estado
   }
-  // Verificar si el estado actual es un estado final
-  return estadosFinales.includes(estadoActual);
-}
 
-// Ejemplo de uso
-const palabra = "abab"; // Cambia esto por la palabra que quieras verificar
-const esAceptada = verificarPalabra(palabra);
-if (esAceptada) {
-  console.log("La palabra es aceptada por el autómata.");
-} else {
-  console.log("La palabra es rechazada por el autómata.");
+  return finalStates.includes(currentState);
 }
 
 // Función para validar una palabra ingresada
-function validarPalabra() {
+function validateWord() {
   const inputElement = document.getElementById("input_regular_phrase");
-  const palabra = inputElement.value;
-  const esAceptada = verificarPalabra(palabra);
+  const word = inputElement.value;
+  const isAccepted = verifyWord(word);
 
   const acceptedWordsElement = document.getElementById("accepted_words");
   const unacceptedWordsElement = document.getElementById("unaccepted_words");
 
-  if (esAceptada) {
-    acceptedWordsElement.value += palabra + "\n";
+
+  if (isAccepted) {
+    acceptedWordsElement.value += word + "\n";
   } else {
-    unacceptedWordsElement.value += palabra + "\n";
+    unacceptedWordsElement.value += word + "\n";
   }
 
-  // Limpiar el campo de entrada después de la validación
+  textToSpeech(isAccepted);
+
+  // Limpiar el campo de entrada despues de la validación
   inputElement.value = "";
 
-  // Poner el cursor en el campo de entrada
+  //Establecer el cursor sobre el campo de entrada
   inputElement.focus();
 }
+
+// fin modulo validateWord ************************************************************************
+
+
+
+// crear modulo language para lo de abajo *******************************************************************
+document.addEventListener("DOMContentLoaded", function () {
+  const languageSelector = document.getElementById("languageSelector");
+
+  // Cargar las traducciones iniciales
+  loadTranslations(languageSelector.value); // Cargar el idioma seleccionado inicialmente
+
+  // Escuchar cambios en el selector de idioma
+  languageSelector.addEventListener("change", function () {
+    const selectedLanguage = languageSelector.value;
+    loadTranslations(selectedLanguage); // Cargar traducciones según el idioma seleccionado
+  });
+
+  function loadTranslations(language) {
+    fetch(`data/translations.json`) // Ruta al archivo translations.json
+      .then((response) => response.json())
+      .then((translations) => {
+        const languageTranslations = translations[language]; // Obtener las traducciones para el idioma
+        // Aplicar las traducciones a los elementos
+        if (languageTranslations) {
+          for (const key in languageTranslations) {
+            if (languageTranslations.hasOwnProperty(key)) {
+              const element = document.getElementById(key);
+              const translation = languageTranslations[key];
+              // Verificar si el elemento existe antes de cambiar su contenido
+              if (element) {
+                // Si es una etiqueta de entrada, actualiza su atributo "for" en lugar del contenido
+                if (element.tagName === "LABEL" && element.hasAttribute("for")) {
+                  const inputElement = document.getElementById(element.getAttribute("for"));
+                  if (inputElement) {
+                    element.textContent = translation;
+                  }
+                } else {
+                  element.textContent = translation;
+                }
+              }
+            }
+          }
+        }
+      })
+      .catch((error) => console.error("Error loading translations:", error));
+  }
+  
+});
+// fin modulo language *******************************************************************************
+
+

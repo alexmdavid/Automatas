@@ -40,7 +40,6 @@ body {
 #languageSelector option {
     background-color: rgb(151, 236, 22);
     color: rgb(48, 84, 48);
-    color;
 }
 
 /* Estilos de la primera sección (lado izquierdo) */
@@ -134,7 +133,7 @@ body {
   #unaccepted_words {
     width: 100%; /* Ancho completo de las áreas de texto */
     height: 200px; /* Altura ajustada según tus necesidades */
-    font-size: 16px;
+    font-size: 20;
     resize: none;  
     padding: 10px;
     margin: 15px;
