@@ -164,6 +164,44 @@ function textToSpeech(isAccepted) {
 
 // fin modulo textToEspeech **********************************************************************************
 
+function resetRout() {
+  for (let i = 0; i < edges.length; i++) {
+    edges[i].background = false
+  }
+}
+
+function EnabledRout(rout) {
+  resetRout()
+  for (let i = 0; i < rout.length; i++) {
+
+    let from = rout[i].from
+    let to = rout[i].to
+
+
+    
+    let edge = edges.find((edge) => edge.from === from && edge.to === to)
+
+    if (edge) {
+      edge.background = {
+        enabled: true,
+        color: "black",
+        size: 10,
+        dashes: [40, 20],
+      }
+
+      nodes[from].group = "enabledd"
+      options = {
+        groups: {
+          enabledd: {color:{background:'#64FF00',border:'#65C924'}, borderWidth:3}
+        }
+      }
+
+      new vis.Network(container, data, options)
+      console.log(from, to, edge.background)
+
+    }
+  }
+}
 
 
 // crear modulo validateWord para lo de abajo *****************************************************************************
@@ -173,16 +211,19 @@ const finalStates = [0, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
 // Función para verificar una palabra
 function verifyWord(word) {
   let currentState = 0; // The initial state
+  var rout = []
   for (let i = 0; i < word.length; i++) {
     const symbol = word[i];
     // Buscar la transición desde el estado actual con el símbolo actual
     const transition = edges.find((edge) => edge.from === currentState && edge.label === symbol);
+    rout.push(transition)
     if (!transition) {
       return false; // No se encontró una transición válida, la palabra es rechazada
     }
     currentState = transition.to; // Mover al siguiente estado
   }
 
+  EnabledRout(rout)
   return finalStates.includes(currentState);
 }
 
