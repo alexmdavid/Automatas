@@ -193,46 +193,14 @@ function resetRout() {
     edges[i].background = false
   }
 }
-async function EnabledRout(rout) {
-  resetRout();
-  for (let i = 0; i < rout.length; i++) {
-
-    let from = rout[i].from;
-    let to = rout[i].to;
-
-    let edge = edges.find((edge) => edge.from === from && edge.to === to);
-    
-    if (edge) {
-      edge.background = {
-        enabled: true,
-        color: "black",
-        size: 10,
-        dashes: [40, 20],
-      };
-      nodes[from].group = "enabledd";
-      options = {
-        groups: {
-          enabledd: { color: { background: '#64FF00', border: '#65C924' }, borderWidth: 3 },
-        },
-      };
-      
-      new vis.Network(container, data, options);
-      console.log(from, to, edge.background);
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-  }
-}
-
-
-
 // crear modulo validateWord para lo de abajo *****************************************************************************
+function getInputRunTime() {
+  const inputRunTime = document.getElementById("input_run_time");
+  var inputValue = inputRunTime.value;
 
-const inputRunTime = document.getElementById("input_run_time");
-var inputValue = inputRunTime.value;
-
-// Convierte el valor a un número y multiplica por 1000
-var delay = Number(inputValue);
+  // Convierte el valor a un número y multiplica por 1000
+  return Number(inputValue);
+}
 
 function resetRout() {
   for (let i = 0; i < edges.length; i++) {
@@ -241,6 +209,7 @@ function resetRout() {
 }
 async function enabledRout(rout) {
   resetRout();
+  delay = getInputRunTime();
   for (let i = 0; i < rout.length; i++) {
 
     if(rout[i]) {
@@ -259,9 +228,9 @@ async function enabledRout(rout) {
         
         network.setOptions(options);
         network.setData(data);
-        console.log(delay);
+        console.log(delay*1000);
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, delay*1000));
       }
     }
   }
@@ -278,7 +247,7 @@ function verifyWord(word) {
     const transition = edges.find((edge) => edge.from === currentState && edge.label === symbol);
     rout.push(transition)
     if (!transition) {
-      EnabledRout(rout);
+      enabledRout(rout);
       return false; // No se encontró una transición válida, la palabra es rechazada
     }
     
