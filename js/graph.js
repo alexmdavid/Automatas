@@ -169,39 +169,37 @@ function resetRout() {
     edges[i].background = false
   }
 }
-
-function EnabledRout(rout) {
-  resetRout()
+async function EnabledRout(rout) {
+  resetRout();
   for (let i = 0; i < rout.length; i++) {
 
-    let from = rout[i].from
-    let to = rout[i].to
+    let from = rout[i].from;
+    let to = rout[i].to;
 
-
+    let edge = edges.find((edge) => edge.from === from && edge.to === to);
     
-    let edge = edges.find((edge) => edge.from === from && edge.to === to)
-
     if (edge) {
       edge.background = {
         enabled: true,
         color: "black",
         size: 10,
         dashes: [40, 20],
-      }
-
-      nodes[from].group = "enabledd"
+      };
+      nodes[from].group = "enabledd";
       options = {
         groups: {
-          enabledd: {color:{background:'#64FF00',border:'#65C924'}, borderWidth:3}
-        }
-      }
+          enabledd: { color: { background: '#64FF00', border: '#65C924' }, borderWidth: 3 },
+        },
+      };
+      
+      new vis.Network(container, data, options);
+      console.log(from, to, edge.background);
 
-      new vis.Network(container, data, options)
-      console.log(from, to, edge.background)
-
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
 }
+
 
 
 // crear modulo validateWord para lo de abajo *****************************************************************************
