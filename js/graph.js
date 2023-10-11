@@ -2,6 +2,7 @@
 
 var fonts ={ strokeWidth: 2,size:35 }
 
+
 var nodes = [
   { id: 100, label: "START", group: 0, shape: "triangle"},
   { id: 0, label: "q00", group: 0 },
@@ -187,6 +188,42 @@ function textToSpeech(isAccepted) {
 
 // fin modulo textToEspeech **********************************************************************************
 
+function resetRout() {
+  for (let i = 0; i < edges.length; i++) {
+    edges[i].background = false
+  }
+}
+async function EnabledRout(rout) {
+  resetRout();
+  for (let i = 0; i < rout.length; i++) {
+
+    let from = rout[i].from;
+    let to = rout[i].to;
+
+    let edge = edges.find((edge) => edge.from === from && edge.to === to);
+    
+    if (edge) {
+      edge.background = {
+        enabled: true,
+        color: "black",
+        size: 10,
+        dashes: [40, 20],
+      };
+      nodes[from].group = "enabledd";
+      options = {
+        groups: {
+          enabledd: { color: { background: '#64FF00', border: '#65C924' }, borderWidth: 3 },
+        },
+      };
+      
+      new vis.Network(container, data, options);
+      console.log(from, to, edge.background);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }
+}
+
 
 
 // crear modulo validateWord para lo de abajo *****************************************************************************
@@ -202,7 +239,7 @@ function resetRout() {
     edges[i].background = false
   }
 }
-async function EnabledRout(rout) {
+async function enabledRout(rout) {
   resetRout();
   for (let i = 0; i < rout.length; i++) {
 
@@ -247,7 +284,7 @@ function verifyWord(word) {
     
     currentState = transition.to; // Mover al siguiente estado
   }
-  EnabledRout(rout);
+  enabledRout(rout);
   return finalStates.includes(currentState);
 }
 
