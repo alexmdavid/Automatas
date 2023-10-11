@@ -206,24 +206,26 @@ async function EnabledRout(rout) {
   resetRout();
   for (let i = 0; i < rout.length; i++) {
 
-    let from = rout[i].from;
-    let to = rout[i].to;
+    if(rout[i]) {
+      let from = rout[i].from;
+      let to = rout[i].to;
 
-    let edge = edges.find((edge) => edge.from === from && edge.to === to);
-    
-    if (edge) {
-      edge.background = {
-        enabled: true,
-        color: "black",
-        size: 10,
-        dashes: [40, 20],
-      };
+      let edge = edges.find((edge) => edge.from === from && edge.to === to);
       
-      network.setOptions(options);
-      network.setData(data);
-      console.log(delay);
+      if (edge) {
+        edge.background = {
+          enabled: true,
+          color: "black",
+          size: 10,
+          dashes: [40, 20],
+        };
+        
+        network.setOptions(options);
+        network.setData(data);
+        console.log(delay);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
     }
   }
 }
