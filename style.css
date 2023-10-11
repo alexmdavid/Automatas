@@ -14,16 +14,25 @@ body {
 /* Contenedor principal */
 .container {
     display: flex;
-    justify-content: space-between; /* Alinea los elementos a los extremos */
+    justify-content: space-between;
     gap: 10px;
     width: 100%;
     margin: 0 auto;
-    background-color: #ff48005b;
+    background: linear-gradient(
+        to top right,
+        #00ff33b0,
+        #00ff66b0,
+        #00ff99b0,
+        #00ffccb0,
+        #00ffff5b,
+        #00d0ff5b
+    );
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
     padding: 20px;
     box-sizing: border-box;
 }
+  
 
 .hero {
     white-space: nowrap; /* Evita los saltos de línea */
@@ -52,7 +61,7 @@ body {
 }
 
 #input_run_time {
-    width: 30px;
+    width: 40px;
     padding: 5px;
     font-size: 13px;
     border: 1px solid #ccc;
