@@ -2,7 +2,9 @@
 
 var fonts ={ strokeWidth: 2,size:35 }
 
+
 var nodes = [
+  { id: 100, label: "START", group: 0, shape: "triangle"},
   { id: 0, label: "q00", group: 0 },
   { id: 1, label: "q01", group: 0 },
   { id: 2, label: "q02", group: 0 },
@@ -35,6 +37,7 @@ var nodes = [
 ];
 var edges = [
     //rama principal de b
+  { from: 100, to: 0, label: "", font:fonts, arrows:'to'},
   { from: 0, to: 1, label: "b", font:fonts, arrows:'to'},
   { from: 1, to: 16, label:"a", font:fonts, arrows:'to'},
   { from: 16, to: 17,label:"a", font:fonts, arrows:'to'},
