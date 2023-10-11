@@ -125,30 +125,50 @@ new vis.Network(container, data, options);
 
 // hasta aqui debe llegar este modulo ------------------------------------------------------------------------------------------
 
+var speechLanguage = {
+  accepted: {
+    es: "La palabra es aceptada por el autómata",
+    en: "The word is accepted by the automaton",
+    fr: "Le mot est accepté par l'automate",
+    pt: "A palavra é aceita pelo autômato"
+  },
+  unaccepted: {
+    es: "La palabra es rechazada por el autómata",
+    en: "The word is rejected by the automaton",
+    fr: "Le mot est rejeté par l'automate",
+    pt: "A palavra é rejeitada pelo autômato"
+  }
+};
 
-// crear modulo textToEspeech para lo de abajo 
 function textToSpeech(isAccepted) {
   var message = '';
   var languageSelector = document.getElementById("languageSelector");
   var selectedLanguage = languageSelector.value; // Obtiene el idioma seleccionado del select
-
+   
   if (isAccepted) {
-    message = "La palabra es aceptada por el autómata";
+    if (selectedLanguage == 'en') message = speechLanguage.accepted.en;
+    else if (selectedLanguage == 'es') message = speechLanguage.accepted.es;
+    else if (selectedLanguage == 'fr') message = speechLanguage.accepted.fr;
+    else if (selectedLanguage == 'pt') message = speechLanguage.accepted.pt;
   } else {
-    message = "La palabra es rechazada por el autómata";
+    if (selectedLanguage == 'en') message = speechLanguage.unaccepted.en;
+    else if (selectedLanguage == 'es') message = speechLanguage.unaccepted.es;
+    else if (selectedLanguage == 'fr') message = speechLanguage.unaccepted.fr;
+    else if (selectedLanguage == 'pt') message = speechLanguage.unaccepted.pt;
   }
-
   var utterance = new SpeechSynthesisUtterance(message);
   utterance.lang = selectedLanguage; // Establece el idioma de la voz según la selección del select
   speechSynthesis.speak(utterance);
 }
+
+
 // fin modulo textToEspeech **********************************************************************************
 
 
 
 // crear modulo validateWord para lo de abajo *****************************************************************************
 // Arreglo de identificadores de estados finales
-const finalStates = [0, 10, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
+const finalStates = [0, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
 
 // Función para verificar una palabra
 function verifyWord(word) {
