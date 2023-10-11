@@ -3,6 +3,7 @@
 var fonts ={ strokeWidth: 2,size:35 }
 
 var nodes = [
+  { id: 100, label: "START", group: 0, shape: "triangle"},
   { id: 0, label: "q00", group: 0 },
   { id: 1, label: "q01", group: 0 },
   { id: 2, label: "q02", group: 0 },
@@ -34,7 +35,8 @@ var nodes = [
   { id: 28, label: "q28", group: 9 },
 ];
 var edges = [
-    //rama principal de b
+  //rama principal de b
+  { from: 100, to: 0, label: "", font:fonts, arrows:'to'},
   { from: 0, to: 1, label: "b", font:fonts, arrows:'to'},
   { from: 1, to: 16, label:"a", font:fonts, arrows:'to'},
   { from: 16, to: 17,label:"a", font:fonts, arrows:'to'},
@@ -77,6 +79,27 @@ var edges = [
   { from: 27, to: 26, label:"b", font:fonts, arrows:'to' },
   
 ];
+
+const finalStates = [0, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
+
+
+nodes[0].size = 0;
+nodes[0].font = {
+  size: 30,
+}
+
+nodes.forEach(element => {
+  if(finalStates.includes(element.id)) {
+    element.color = '#44ff55';
+    element.borderWidth = 3;
+  }else {
+    element.color = "lightgreen";
+  }
+});
+
+edges.forEach(element => {
+  element.color = "red";
+})
 
 var data = {
   nodes: nodes,
@@ -121,7 +144,7 @@ var options = {
 var container = document.getElementById("box_automaton");
 
 // create a network
-new vis.Network(container, data, options);
+var network = new vis.Network(container, data, options);
 
 // hasta aqui debe llegar este modulo ------------------------------------------------------------------------------------------
 
@@ -167,22 +190,62 @@ function textToSpeech(isAccepted) {
 
 
 // crear modulo validateWord para lo de abajo *****************************************************************************
-// Arreglo de identificadores de estados finales
-const finalStates = [0, 1, 3, 11, 22, 28, 18, 14, 15, 27, 6, 26, 9, 25, 21];
+
+const inputRunTime = document.getElementById("input_run_time");
+var inputValue = inputRunTime.value;
+
+// Convierte el valor a un número y multiplica por 1000
+var delay = Number(inputValue);
+
+function resetRout() {
+  for (let i = 0; i < edges.length; i++) {
+    edges[i].background = false
+  }
+}
+async function EnabledRout(rout) {
+  resetRout();
+  for (let i = 0; i < rout.length; i++) {
+
+    let from = rout[i].from;
+    let to = rout[i].to;
+
+    let edge = edges.find((edge) => edge.from === from && edge.to === to);
+    
+    if (edge) {
+      edge.background = {
+        enabled: true,
+        color: "black",
+        size: 10,
+        dashes: [40, 20],
+      };
+      
+      network.setOptions(options);
+      network.setData(data);
+      console.log(delay);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }
+}
+
 
 // Función para verificar una palabra
 function verifyWord(word) {
   let currentState = 0; // The initial state
+  var rout = []
   for (let i = 0; i < word.length; i++) {
     const symbol = word[i];
     // Buscar la transición desde el estado actual con el símbolo actual
     const transition = edges.find((edge) => edge.from === currentState && edge.label === symbol);
+    rout.push(transition)
     if (!transition) {
+      EnabledRout(rout);
       return false; // No se encontró una transición válida, la palabra es rechazada
     }
+    
     currentState = transition.to; // Mover al siguiente estado
   }
-
+  EnabledRout(rout);
   return finalStates.includes(currentState);
 }
 
